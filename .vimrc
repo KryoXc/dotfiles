@@ -11,41 +11,27 @@ set preserveindent
 set softtabstop=4
 set shiftwidth=4
 
+set splitbelow
+set splitright
+
+"Add side divider to attempt to keep under 80 columns
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=232 guibg=#2c2d27
 
-set listchars=tab:>-,trail:-
+"Fix tab complete coloring
+hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#49483e gui=NONE
+hi Error ctermbg=NONE ctermfg=131 guibg=NONE guifg=#af5f5f cterm=reverse gui=reverse
 
+"Macro to show whitespace characters
+set listchars=tab:>-,trail:-
 nnoremap <Leader>w :set list!<CR>
 
+" Enable plugins
+" autocmd FileType python delimitMate
+" autocmd FileType python compiler pylint
 
-function! ConditionalPairMap(open, close)
-    let line = getline('.')
-    let col = col('.')
-    if col < col('$') || stridx(line, a:close, col + 1) != -1
-        return a:open
-    else
-        return a:open . a:close . repeat("\<left>", len(a:close))
-    endif
-endf
-
-function! IgnoreClosingPairMap(close)
-    if matchstr(getline('.'),'\%' . col('.') . 'c.') == a:close
-        return "\<Right>"
-    else
-        return a:close . "\<Right>"
-    endif
-endf 
+call pathogen#infect()
 
 
-"remap Conditional Pair Mappings
-inoremap <expr> ( ConditionalPairMap('(', ')')
-inoremap <expr> { ConditionalPairMap('{', '}')
-inoremap <expr> [ ConditionalPairMap('[', ']')
-
-"remap ignore Closing Brace Mappings
-inoremap <expr> ) IgnoreClosingPairMap(')')
-inoremap <expr> } IgnoreClosingPairMap('}')
-inoremap <expr> ] IgnoreClosingPairMap(']')
-
-"inoremap <expr> ) strpart(getline('.'),col('.')-1,1) ++ ")" ? "\<Right>" : ")"
+filetype plugin indent on
