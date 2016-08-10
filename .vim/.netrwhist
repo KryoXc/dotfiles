@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/dmorales/code/git/importer/build'
+let g:netrw_dirhist_2='/home/dmorales/code/git/calc_scripts/gradle'
+let g:netrw_dirhist_3='/home/dmorales/code/git/calc_scripts/build'
+let g:netrw_dirhist_4='/home/dmorales/code/git/calc_scripts/gradle'
+let g:netrw_dirhist_5='/home/dmorales/code/git/calc_scripts/src/main/groovy/net/ijus/scripts/runners'
